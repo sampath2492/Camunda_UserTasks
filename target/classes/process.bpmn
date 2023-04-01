@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.8.0">
+  <bpmn:process id="task-3-process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Create a Product">
+      <bpmn:outgoing>SequenceFlow_1fp17al</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1fp17al" sourceRef="StartEvent_1" targetRef="create-draft" />
+    <bpmn:userTask id="create-draft" name="Create a Draft" camunda:assignee="susmitha">
+      <bpmn:extensionElements>
+        <camunda:taskListener class="com.example.workflow.CreateDraft" event="assignment" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1fp17al</bpmn:incoming>
+      <bpmn:outgoing>Flow_1l35gwf</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="approve_draft" name="Approve the Draft" camunda:assignee="sampath">
+      <bpmn:extensionElements>
+        <camunda:taskListener class="com.example.workflow.ApproveDraft" event="assignment" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1l35gwf</bpmn:incoming>
+      <bpmn:outgoing>Flow_0viafg7</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1l35gwf" sourceRef="create-draft" targetRef="approve_draft" />
+    <bpmn:userTask id="dealer_edit" name="Delaer Edit" camunda:assignee="sumit">
+      <bpmn:extensionElements>
+        <camunda:taskListener class="com.example.workflow.DealerEdit" event="assignment" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0viafg7</bpmn:incoming>
+      <bpmn:outgoing>Flow_0bd9ek9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0viafg7" sourceRef="approve_draft" targetRef="dealer_edit" />
+    <bpmn:userTask id="ops_edit" name="Ops Edit" camunda:assignee="santhosh">
+      <bpmn:extensionElements>
+        <camunda:taskListener class="com.example.workflow.OpsEdit" event="assignment" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0bd9ek9</bpmn:incoming>
+      <bpmn:outgoing>Flow_1bfh0lv</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0bd9ek9" sourceRef="dealer_edit" targetRef="ops_edit" />
+    <bpmn:endEvent id="Event_1559ax6" name="Product is Created">
+      <bpmn:incoming>Flow_1bfh0lv</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1bfh0lv" sourceRef="ops_edit" targetRef="Event_1559ax6" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="task-3-process">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="155" y="142" width="85" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_08mft2c_di" bpmnElement="create-draft">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0cajfgl_di" bpmnElement="approve_draft">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1xih3ar_di" bpmnElement="dealer_edit">
+        <dc:Bounds x="590" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1r48fxg_di" bpmnElement="ops_edit">
+        <dc:Bounds x="750" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1559ax6_di" bpmnElement="Event_1559ax6">
+        <dc:Bounds x="912" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="905" y="145.5" width="50" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1fp17al_di" bpmnElement="SequenceFlow_1fp17al">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1l35gwf_di" bpmnElement="Flow_1l35gwf">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0viafg7_di" bpmnElement="Flow_0viafg7">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="590" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0bd9ek9_di" bpmnElement="Flow_0bd9ek9">
+        <di:waypoint x="690" y="117" />
+        <di:waypoint x="750" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bfh0lv_di" bpmnElement="Flow_1bfh0lv">
+        <di:waypoint x="850" y="117" />
+        <di:waypoint x="912" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
