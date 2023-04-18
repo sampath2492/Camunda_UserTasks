@@ -6,11 +6,11 @@ import org.camunda.bpm.engine.delegate.TaskListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DealerEdit implements TaskListener {
+public class SalesEvent implements TaskListener {
 
     @Override
     public void notify(DelegateTask delegateTask) {
-        Logger.getLogger("Product workFlow")
-                .log(Level.INFO, "Dealer Edit is Completed");
+        Logger.getLogger("Customer workFlow")
+                .log(Level.INFO, "Sales Info Entered.");
     }
 }

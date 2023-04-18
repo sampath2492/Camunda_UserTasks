@@ -1,36 +1,54 @@
 package com.example.workflow.controller;
 
-import com.example.workflow.dto.Product;
+import com.example.workflow.dto.Customer;
 import com.example.workflow.service.TasksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/tasks")
+@RequestMapping("/api/customer")
 public class TaskController {
 
     @Autowired
     private TasksService tasksService;
 
-    @PostMapping("/createProduct")
-    public ResponseEntity<Product> completeCreateProductTask(@RequestBody Product product) {
-        Product createdProduct = tasksService.triggerCreateProduct(product);
-        return ResponseEntity.ok(createdProduct);
+    @PostMapping("/create")
+    public ResponseEntity<Customer> completeCreateCustomerTask(@RequestBody Customer customer) {
+        Customer createdCustomer = tasksService.triggerCreateCustomer(customer);
+        return ResponseEntity.ok(createdCustomer);
     }
-    @PostMapping("/{id}/approveProduct")
-    public ResponseEntity<Void> completeApproveProductTask(@PathVariable Long id) {
-        tasksService.triggerApproveProduct(id);
+    @PostMapping("/{id}/salesEvent")
+    public ResponseEntity<Void> completeSalesEvent(@PathVariable Long id) {
+        tasksService.triggerSalesEvent(id);
         return ResponseEntity.ok().build();
     }
-    @PostMapping("/{id}/dealerEdit")
-    public ResponseEntity<Void> completeDealerEditTask(@PathVariable Long id) {
-        tasksService.triggerDealerEdit(id);
+    @PostMapping("/{id}/rmEvent")
+    public ResponseEntity<Void> completeRmEvent(@PathVariable Long id) {
+        tasksService.triggerRmEvent(id);
         return ResponseEntity.ok().build();
     }
-    @PostMapping("/{id}/opsEdit")
-    public ResponseEntity<Void> completeOpsEditTask(@PathVariable Long id) {
-        tasksService.triggerOpsEdit(id);
+    @PostMapping("/{id}/docEvent")
+    public ResponseEntity<Void> completeDocEvent(@PathVariable Long id) {
+        tasksService.triggerDocEvent(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{id}/creditEvent")
+    public ResponseEntity<Void> completeCreditEvent(@PathVariable Long id) {
+        tasksService.triggerCreditEvent(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{id}/sdcEvent")
+    public ResponseEntity<Void> completeSdcEvent(@PathVariable Long id) {
+        tasksService.triggerSdcEvent(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{id}/welcome")
+    public ResponseEntity<Void> completeWelcomeEvent(@PathVariable Long id) {
+        tasksService.triggerWelcomeEvent(id);
         return ResponseEntity.ok().build();
     }
 

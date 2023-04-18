@@ -13,16 +13,23 @@
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/camunda
+    url: jdbc:mysql://camundadb.csgxvjgipglh.ap-southeast-1.rds.amazonaws.com:3306/camunda
     driverClassName: org.mariadb.jdbc.Driver
-    username: camunda
-    password: camunda
+    username: admin
+    password: dbsadmin
 
 
 server:
-  port: 8080
+  port: 443
+  ssl:
+    enabled: true
+    key-store: classpath:keystore.jks
+    key-store-password: camunda
+    key-password: camunda
+    key-store-type: JKS
 
 
 camunda.bpm.admin-user:
   id: admin
   password: admin
+

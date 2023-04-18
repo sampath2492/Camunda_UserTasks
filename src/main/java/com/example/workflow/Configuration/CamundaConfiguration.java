@@ -1,9 +1,6 @@
 package com.example.workflow.Configuration;
 
-import com.example.workflow.ApproveDraft;
-import com.example.workflow.CreateDraft;
-import com.example.workflow.DealerEdit;
-import com.example.workflow.OpsEdit;
+import com.example.workflow.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,22 +8,34 @@ import org.springframework.context.annotation.Configuration;
 public class CamundaConfiguration {
 
     @Bean
-    public CreateDraft createDraftListener() {
-        return new CreateDraft();
+    public CreateCustomer createCustomerListener() {
+        return new CreateCustomer();
     }
 
     @Bean
-    public ApproveDraft approveDraftListener() {
-        return new ApproveDraft();
+    public SalesEvent salesEventListener() {
+        return new SalesEvent();
     }
 
     @Bean
-    public DealerEdit dealerEditListener() {
-        return new DealerEdit();
+    public RmEvent rmEventListener() {
+        return new RmEvent();
     }
 
     @Bean
-    public OpsEdit opsEditListener() {
-        return new OpsEdit();
+    public DocEvent docEventListener() { return new DocEvent(); }
+
+    @Bean
+    public CreditEvent creditEventListener() {
+        return new CreditEvent();
+    }
+
+    @Bean
+    public SdcEvent sdcEventListener() { return new SdcEvent();
+    }
+
+    @Bean
+    public WelcomeEvent welcomeEventListener() {
+        return new WelcomeEvent();
     }
 }

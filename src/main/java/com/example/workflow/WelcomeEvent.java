@@ -6,11 +6,11 @@ import org.camunda.bpm.engine.delegate.TaskListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CreateDraft implements TaskListener {
+public class WelcomeEvent implements TaskListener {
 
     @Override
     public void notify(DelegateTask delegateTask) {
-        Logger.getLogger("Product workFlow")
-                .log(Level.INFO, "Created a Draft");
+        Logger.getLogger("Customer workFlow")
+                .log(Level.INFO, "Welcome Customer On-Board.");
     }
 }
